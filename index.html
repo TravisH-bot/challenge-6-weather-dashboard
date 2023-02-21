@@ -16,9 +16,13 @@
   </head>
   <body>
     <header>
-      <nav class="navbar bg-body-tertiary">
+      <nav class="navbar bg-body-tertiary mb-5">
         <div class="container d-flex justify-content-around">
-          <a class="navbar-brand" href="#">Weather Dashboard</a>
+          <a
+            class="navbar-brand shadow p-1 mb-2 bg-body-tertiary rounded"
+            href="#"
+            >Weather Dashboard</a
+          >
           <img
             class=""
             src="./assets/images/cloud-sun-fill.svg"
@@ -30,18 +34,22 @@
       </nav>
     </header>
 
-    <div class="container-fluid text-center border border-primary">
+    <div class="container-fluid text-center">
       <div class="row">
         <div class="col-3">
           <label for="exampleDataList" class="form-label"
-            >Search for a City:</label
+            ><h2>Search for a City:</h2></label
           >
           <input
-            class="form-control"
+            class="form-control border border-dark"
             list="datalistOptions"
             id="exampleDataList"
             placeholder="Type to search..."
           />
+          <button type="button" class="btn btn-secondary mt-2 w-100">
+            Search
+          </button>
+          <hr />
           <datalist id="datalistOptions">
             <option value="San Francisco"></option>
             <option value="New York"></option>
@@ -51,78 +59,115 @@
           </datalist>
         </div>
 
-        <div class="col-sm-9">
-          2 of 2
-          <div class="col border border-dark text-start p-3">
+        <div class="col">
+          <div class="col border border-dark rounded-2 text-start p-3">
             <h2>City Name</h2>
             <h4>Temp:</h4>
             <h4>Wind:</h4>
             <h4>Humidity:</h4>
           </div>
-          <div class="col pt-5">
-            <div class="row row-cols-1 row-cols-md-3 g-4">
-              <div class="col">
-                <div class="card">
-                  <img src="..." class="card-img-top" alt="..." />
+          <div class="5-day d-flex text-start py-3">
+            <h3>5-Day Forecast:</h3>
+          </div>
+          <div class="d-flex align-items-start pt-3 pb-5">
+            <div class="row">
+              <div class="col-md-4">
+                <div class="card bg-dark text-light text-start mb-2">
                   <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">
-                      This is a longer card with supporting text below as a
-                      natural lead-in to additional content. This content is a
-                      little bit longer.
-                    </p>
+                    <h3 class="card-title pb-2">Card title</h3>
+                    <img
+                      class=""
+                      src="./assets/images/cloud-sun-fill.svg"
+                      alt=""
+                      width="45"
+                      height="45"
+                    />
+                    <h4>Temp:</h4>
+                    <br />
+                    <h4>Wind:</h4>
+                    <br />
+                    <h4>Humidity:</h4>
+                    <br />
                   </div>
                 </div>
               </div>
-              <div class="col">
-                <div class="card">
-                  <img src="..." class="card-img-top" alt="..." />
+              <div class="col-md-4">
+                <div class="card bg-dark text-light text-start mb-2">
                   <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">
-                      This is a longer card with supporting text below as a
-                      natural lead-in to additional content. This content is a
-                      little bit longer.
-                    </p>
+                    <h3 class="card-title pb-2">Card title</h3>
+                    <img
+                      class=""
+                      src="./assets/images/cloud-sun-fill.svg"
+                      alt=""
+                      width="45"
+                      height="45"
+                    />
+                    <h4>Temp:</h4>
+                    <br />
+                    <h4>Wind:</h4>
+                    <br />
+                    <h4>Humidity:</h4>
+                    <br />
                   </div>
                 </div>
               </div>
-              <div class="col">
-                <div class="card">
-                  <img src="..." class="card-img-top" alt="..." />
+              <div class="col-md-4">
+                <div class="card bg-dark text-light text-start mb-2">
                   <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">
-                      This is a longer card with supporting text below as a
-                      natural lead-in to additional content. This content is a
-                      little bit longer.
-                    </p>
+                    <h3 class="card-title pb-2">Card title</h3>
+                    <img
+                      class=""
+                      src="./assets/images/cloud-sun-fill.svg"
+                      alt=""
+                      width="45"
+                      height="45"
+                    />
+                    <h4>Temp:</h4>
+                    <br />
+                    <h4>Wind:</h4>
+                    <br />
+                    <h4>Humidity:</h4>
+                    <br />
                   </div>
                 </div>
               </div>
-              <div class="col">
-                <div class="card">
-                  <img src="..." class="card-img-top" alt="..." />
+              <div class="col-md-4">
+                <div class="card bg-dark text-light text-start mb-2">
                   <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">
-                      This is a longer card with supporting text below as a
-                      natural lead-in to additional content. This content is a
-                      little bit longer.
-                    </p>
+                    <h3 class="card-title pb-2">Card title</h3>
+                    <img
+                      class=""
+                      src="./assets/images/cloud-sun-fill.svg"
+                      alt=""
+                      width="45"
+                      height="45"
+                    />
+                    <h4>Temp:</h4>
+                    <br />
+                    <h4>Wind:</h4>
+                    <br />
+                    <h4>Humidity:</h4>
+                    <br />
                   </div>
                 </div>
               </div>
-              <div class="col">
-                <div class="card h-100">
-                  <img src="..." class="card-img-top" alt="..." />
+              <div class="col-md-4">
+                <div class="card bg-dark text-light text-start mb-2">
                   <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">
-                      This is a longer card with supporting text below as a
-                      natural lead-in to additional content. This content is a
-                      little bit longer.
-                    </p>
+                    <h3 class="card-title pb-2">Card title</h3>
+                    <img
+                      class=""
+                      src="./assets/images/cloud-sun-fill.svg"
+                      alt=""
+                      width="45"
+                      height="45"
+                    />
+                    <h4>Temp:</h4>
+                    <br />
+                    <h4>Wind:</h4>
+                    <br />
+                    <h4>Humidity:</h4>
+                    <br />
                   </div>
                 </div>
               </div>

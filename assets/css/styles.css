@@ -7,3 +7,13 @@
   font-size: 40px;
   font-weight: bold;
 }
+
+h2 {
+  font-weight: bolder;
+}
+
+hr {
+  height: 1px;
+  background-color: black;
+  border: none;
+}
