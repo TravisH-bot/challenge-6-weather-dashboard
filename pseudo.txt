@@ -1,3 +1,0 @@
-https://api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}&appid={5a0a32aec4aed4bfdc1f7aae043ce095}
-
-d-flex align-items-start justify-content-around pt-3 pb-5 w-75
