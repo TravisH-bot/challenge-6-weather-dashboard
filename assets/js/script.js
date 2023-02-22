@@ -1,8 +1,6 @@
-var APIKey = "";
-var num = "5";
-var city = "Denver";
-var state;
-var country;
+var APIKey = "ae7bfaba176164fc10b50ddc4d0722e0";
+var num = "1";
+var city = "Los Angeles";
 var cCity = document.getElementById("currnet-city");
 var cTemp = document.getElementById("currnet-temp");
 var cWind = document.getElementById("currnet-wind");
@@ -10,12 +8,8 @@ var cHumidity = document.getElementById("currnet-humidity");
 var fetchButton = document.getElementById("searchBtn");
 
 var citySearch =
-  "http://api.openweathermap.org/geo/1.0/direct?q=" +
+  "https://api.openweathermap.org/data/2.5/forecast?q=" +
   city +
-  state +
-  country +
-  "&limit=" +
-  num +
   "&appid=" +
   APIKey;
 
@@ -25,6 +19,11 @@ fetch(citySearch)
   })
   .then(function (data) {
     console.log(data);
+
+    for (var i = 0; i < data.length; i++) {
+      var lat = data[i].city.coord.lat;
+      console.log(lat);
+    }
   });
 
 var lat = "39.73";
@@ -53,6 +52,7 @@ function getApi() {
         cityEl.textContent = data[i].name;
 
         cCity.appendChild(cityEl);
+        console.log(cityEl);
       }
     });
 }
