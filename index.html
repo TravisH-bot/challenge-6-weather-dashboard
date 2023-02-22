@@ -46,7 +46,11 @@
             id="exampleDataList"
             placeholder="Type to search..."
           />
-          <button type="button" class="btn btn-secondary mt-2 w-100">
+          <button
+            type="button"
+            id="searchBtn"
+            class="btn btn-secondary mt-2 w-100"
+          >
             Search
           </button>
           <hr />
@@ -62,10 +66,10 @@
         <!-- Current City Display -->
         <div id="city-display" class="col">
           <div class="col border border-dark rounded-2 text-start p-3 w-75">
-            <h2>City Name</h2>
-            <h4>Temp:</h4>
-            <h4>Wind:</h4>
-            <h4>Humidity:</h4>
+            <h2 id="currnet-city">City Name</h2>
+            <h4 id="current-temp">Temp:</h4>
+            <h4 id="current-wind">Wind:</h4>
+            <h4 id="current-humidity">Humidity:</h4>
           </div>
 
           <!-- 5-Day Forecast title -->
