@@ -7,6 +7,10 @@ var cWind = document.getElementById("currnet-wind");
 var cHumidity = document.getElementById("currnet-humidity");
 var fetchButton = document.getElementById("searchBtn");
 
+//temporary values for lat and lon  later to be updated by Travi's function
+var lat = "39.73";
+var lon = "-104.98";
+
 var citySearch =
   "https://api.openweathermap.org/data/2.5/forecast?q=" +
   city +
@@ -26,8 +30,37 @@ fetch(citySearch)
     }
   });
 
-var lat = "39.73";
-var lon = "-104.98";
+/* 
+  Fetches the /weather data based on the lat and lon.
+  Displays the data in the top card
+*/
+function addCurrentWeather() {
+  //building the request URL
+  var requestURL =
+    "https://api.openweathermap.org/data/2.5/weather?" +
+    "&lat=" +
+    lat +
+    "&lon=" +
+    lon +
+    "&appid=" +
+    APIKey +
+    "&units=imperial";
+
+  //fetching the data
+  fetch(requestURL)
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (data) {
+      console.log(data);
+
+      //displaying the data
+      $("#current-city").text(data.name);
+      $("#current-temp").text("Temp: " + data.main.temp);
+      $("#current-wind").text("Wind: " + data.wind.speed);
+      $("#current-humidity").text("Humidity: " + data.main.humidity);
+    });
+}
 
 function getApi() {
   var queryURL =
@@ -57,4 +90,7 @@ function getApi() {
     });
 }
 
-fetchButton.addEventListener("click", getApi);
+fetchButton.addEventListener("click", function () {
+  addCurrentWeather();
+  getApi();
+});
