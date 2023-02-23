@@ -9,6 +9,12 @@ var navIcon = document.getElementById("nav-icon");
 var cIcon = document.getElementById("current-icon");
 var fetchButton = document.getElementById("searchBtn");
 
+// GH added - Variables
+var citySearchBar = document.getElementById("exampleDataList");
+var parentSearch = document.getElementById("searchHistory");
+var cityCount = JSON.parse(localStorage.getItem("cities")) || [];
+var cityChoice;
+
 //temporary values for lat and lon  later to be updated by Travi's function
 var lat = "39.73";
 var lon = "-104.98";
@@ -20,7 +26,6 @@ function search() {
     city +
     "&appid=" +
     APIKey;
-
   fetch(citySearch)
     .then(function (response) {
       return response.json();
@@ -104,7 +109,33 @@ function getApi() {
     });
 }
 
+// GH added -city search storage & history buttons
+
+function cityRequest() {
+  cityCount.push(citySearchBar.value);
+  localStorage.setItem("cities", JSON.stringify(cityCount));
+  cityCount = JSON.parse(localStorage.getItem("cities"));
+  parentSearch.textContent = "";
+
+  for (i = 0; i < cityCount.length; i++) {
+    var addedCity = document.createElement("button");
+    addedCity.textContent = cityCount[i];
+    addedCity.className = "previousCities";
+    parentSearch.appendChild(addedCity);
+    // console.log(addedCity);
+
+    // click event on button created with previous city search
+    addedCity.addEventListener("click", function (event) {
+      cityChoice = event.target.innerText;
+      console.log(cityChoice);
+      // addCurrentWeather();
+      // getApi();
+    });
+  }
+}
+
 fetchButton.addEventListener("click", function () {
   addCurrentWeather();
   getApi();
+  cityRequest();
 });
