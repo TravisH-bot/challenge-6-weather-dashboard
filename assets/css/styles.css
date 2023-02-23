@@ -14,4 +14,6 @@ h2 {
 
 .previousCities {
   display: block;
+  background-color: lightblue;
+  margin: 5px;
 }

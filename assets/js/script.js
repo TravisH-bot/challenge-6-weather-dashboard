@@ -26,25 +26,30 @@ var citySearch =
 // GH added -city search storage & history buttons
 
 function cityRequest() {
-  cityCount.push(citySearchBar.value);
-  localStorage.setItem("cities", JSON.stringify(cityCount));
-  cityCount = JSON.parse(localStorage.getItem("cities"));
-  parentSearch.textContent = "";
+  console.log(citySearchBar);
+  if (citySearchBar.value === "") {
+    return;
+  } else {
+    cityCount.push(citySearchBar.value);
+    localStorage.setItem("cities", JSON.stringify(cityCount));
+    cityCount = JSON.parse(localStorage.getItem("cities"));
+    parentSearch.textContent = "";
 
-  for (i = 0; i < cityCount.length; i++) {
-    var addedCity = document.createElement("button");
-    addedCity.textContent = cityCount[i];
-    addedCity.className = "previousCities";
-    parentSearch.appendChild(addedCity);
-    // console.log(addedCity);
+    for (i = 0; i < cityCount.length; i++) {
+      var addedCity = document.createElement("button");
+      addedCity.textContent = cityCount[i];
+      addedCity.className = "previousCities";
+      parentSearch.appendChild(addedCity);
+      // console.log(addedCity);
 
-    // click event on button created with previous city search
-    addedCity.addEventListener("click", function (event) {
-      cityChoice = event.target.innerText;
-      console.log(cityChoice);
-      // addCurrentWeather();
-      // getApi();
-    });
+      // click event on button created with previous city search
+      addedCity.addEventListener("click", function (event) {
+        cityChoice = event.target.innerText;
+        console.log(cityChoice);
+        // addCurrentWeather();
+        // getApi();
+      });
+    }
   }
 }
 
