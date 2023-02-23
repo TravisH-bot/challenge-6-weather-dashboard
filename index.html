@@ -23,7 +23,8 @@
             >Weather Dashboard</a
           >
           <img
-            class=""
+            id="nav-icon"
+            class="shadow px-2 mb-2 bg-body-tertiary rounded"
             src="./assets/images/cloud-sun-fill.svg"
             alt=""
             width="60"
@@ -67,8 +68,18 @@
 
         <!-- Current City Display -->
         <div id="city-display" class="col">
-          <div class="col border border-dark rounded-2 text-start p-3 w-75">
-            <h2 id="current-city">City Name</h2>
+          <div
+            class="col border border-dark bg-light rounded-2 text-start p-3 w-75"
+          >
+            <h2>
+              <span id="current-city">City Name</span>
+              <img
+                id="current-icon"
+                class="emoji mx-4"
+                src="./assets/images/cloud-sun-fill.svg"
+                alt="weather-icon"
+              />
+            </h2>
             <h4 id="current-temp">Temp:</h4>
             <h4 id="current-wind">Wind:</h4>
             <h4 id="current-humidity">Humidity:</h4>
@@ -83,7 +94,7 @@
           <div class="d-flex-inline align-items-start w-75">
             <div class="row">
               <div class="col">
-                <div class="card bg-dark text-light text-start mb-2">
+                <div class="card bg-light text-dark text-start mb-2">
                   <div class="card-body">
                     <h3 class="card-title pb-2">Date</h3>
                     <img
@@ -104,7 +115,7 @@
                 </div>
               </div>
               <div class="col">
-                <div class="card bg-dark text-light text-start mb-2">
+                <div class="card bg-light text-dark text-start mb-2">
                   <div class="card-body">
                     <h3 class="card-title pb-2">Date</h3>
                     <img
@@ -125,7 +136,7 @@
                 </div>
               </div>
               <div class="col">
-                <div class="card bg-dark text-light text-start mb-2">
+                <div class="card bg-light text-dark text-start mb-2">
                   <div class="card-body">
                     <h3 class="card-title pb-2">Date</h3>
                     <img
@@ -146,7 +157,7 @@
                 </div>
               </div>
               <div class="col">
-                <div class="card bg-dark text-light text-start mb-2">
+                <div class="card bg-light text-dark text-start mb-2">
                   <div class="card-body">
                     <h3 class="card-title pb-2">Date</h3>
                     <img
@@ -167,7 +178,7 @@
                 </div>
               </div>
               <div class="col">
-                <div class="card bg-dark text-light text-start mb-2">
+                <div class="card bg-light text-dark text-start mb-2">
                   <div class="card-body">
                     <h3 class="card-title pb-2">Date</h3>
                     <img
