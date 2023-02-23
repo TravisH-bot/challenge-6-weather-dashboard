@@ -1,10 +1,5 @@
-var APIKey = "66410c64cb0ebf1efa949bd7a8d7edb7";
+var APIKey = "ae7bfaba176164fc10b50ddc4d0722e0";
 var num = "1";
-var city = "Los Angeles";
-var cCity = document.getElementById("currnet-city");
-var cTemp = document.getElementById("currnet-temp");
-var cWind = document.getElementById("currnet-wind");
-var cHumidity = document.getElementById("currnet-humidity");
 var navIcon = document.getElementById("nav-icon");
 var cIcon = document.getElementById("current-icon");
 var fetchButton = document.getElementById("searchBtn");
@@ -15,12 +10,12 @@ var parentSearch = document.getElementById("searchHistory");
 var cityCount = JSON.parse(localStorage.getItem("cities")) || [];
 var cityChoice;
 
-//temporary values for lat and lon  later to be updated by Travi's function
-var lat = "39.73";
-var lon = "-104.98";
+// values for lat and lon later to be updated by Travi's search(city) function
+var lat;
+var lon;
 
 //search function that will convert the lat and lon to the addCurrentWeather function
-function search() {
+function search(city) {
   var citySearch =
     "https://api.openweathermap.org/data/2.5/forecast?q=" +
     city +
@@ -31,8 +26,11 @@ function search() {
       return response.json();
     })
     .then(function (data) {
-      var lat = data.city.coord.lat;
-      var lon = data.city.coord.lon;
+      lat = data.city.coord.lat;
+      lon = data.city.coord.lon;
+      //calling weather APIs and displaying weather data once lat and lon available
+      addCurrentWeather();
+      fiveDayForecast();
     });
 }
 /* 
@@ -81,7 +79,10 @@ function addCurrentWeather() {
     });
 }
 
-function getApi() {
+/* 
+  Fetches and siaplys the forecast for 5 days based on lat and lon
+*/
+function fiveDayForecast() {
   var queryURL =
     "https://api.openweathermap.org/data/2.5/forecast?lat=" +
     lat +
@@ -98,16 +99,19 @@ function getApi() {
     .then(function (data) {
       console.log(data);
       for (var i = 0; i < 6; i++) {
-        $("#temp-" + i).text("Temp: " + data.list[i].main.temp + "°F");
-        $("#wind-" + i).text("wind: " + data.list[i].wind.speed + "MPH");
-        $("#humid-" + i).text("humid: " + data.list[i].main.humidity + "%");
-        $("#date-" + i).text("Date: " + data.list[i].dt);
+
+        $("#temp-" + i ) .text("Temp: " + data.list[i].main.temp + "°F")
+        $("#wind-" + i ) .text("wind: " + data.list[i].wind.speed + "MPH")
+        $("#humid-" + i ) .text("humid: " + data.list[i].main.humidity + "%")
+        //$("#date-" + i ) .text("Date: " + data.list[i].dt.format("MM DD, YYYY"));
         // document.getElementById("temp-" + i) .textcontent = "Temp: " + data.list[i].main.temp
       }
     });
 }
-// GH added -city search storage & history buttons
 
+/* 
+  GH added -city search storage & history buttons
+*/
 function cityRequest() {
   var searchResult = citySearchBar.value.trim().toLowerCase();
   console.log(cityCount.indexOf(searchResult));
@@ -122,28 +126,48 @@ function cityRequest() {
     cityCount = JSON.parse(localStorage.getItem("cities"));
     parentSearch.textContent = "";
 
-    for (i = 0; i < cityCount.length; i++) {
-      var addedCity = document.createElement("button");
-      addedCity.textContent = cityCount[i];
-      addedCity.className = "previousCities";
-      parentSearch.appendChild(addedCity);
-      // console.log(addedCity);
 
-      // click event on button created with previous city search
-      addedCity.addEventListener("click", function (event) {
-        cityChoice = event.target.innerText.trim().toLowerCase();
-        console.log(cityChoice);
-        console.log(cityCount);
+  for (i = 0; i < cityCount.length; i++) {
+    var addedCity = document.createElement("button");
+    addedCity.textContent = cityCount[i];
+    addedCity.className = "previousCities";
+    parentSearch.appendChild(addedCity);
 
-        // addCurrentWeather();
-        // getApi();
-      });
-    }
+
+    // click event on button created with previous city search
+    addedCity.addEventListener("click", function (event) {
+      cityChoice = event.target.innerText;
+      console.log(cityChoice);
+      search(cityChoice);
+    });
   }
 }
 
+//just the button listener
 fetchButton.addEventListener("click", function () {
-  addCurrentWeather();
-  getApi();
-  cityRequest();
+  if (citySearchBar.value != "") {
+    search(citySearchBar.value);
+    cityRequest();
+  } else {
+    window.alert("Please enter a city name.");
+  }
 });
+
+
+//Display cities from local storage when page loads. Handler for .ready 
+$( function(){
+  
+  for (i = 0; i < cityCount.length; i++) {
+    var addedCity = document.createElement("button");
+    addedCity.textContent = cityCount[i];
+    addedCity.className = "previousCities";
+    parentSearch.appendChild(addedCity);
+
+    // click event on button created with previous city search
+    addedCity.addEventListener("click", function (event) {
+      cityChoice = event.target.innerText;
+      console.log(cityChoice);
+      search(cityChoice);
+    });
+    }
+} )
