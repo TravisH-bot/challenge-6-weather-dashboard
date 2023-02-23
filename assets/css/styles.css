@@ -11,3 +11,7 @@
 h2 {
   font-weight: bolder;
 }
+
+.previousCities {
+  display: block;
+}
