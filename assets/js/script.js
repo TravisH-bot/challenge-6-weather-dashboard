@@ -96,6 +96,8 @@ function fiveDayForecast() {
       return response.json();
     })
     .then(function (data) {
+
+
       for (var i = 0; i < 5; i++) {
         var timeStamp = i * 8 + 3;
         console.log(timeStamp);
@@ -111,6 +113,7 @@ function fiveDayForecast() {
           "src",
           `https://openweathermap.org/img/wn/${data.list[timeStamp].weather[0].icon}.png`
         );
+
         //$("#date-" + i ) .text("Date: " + data.list[i].dt.format("MM DD, YYYY"));
         // document.getElementById("temp-" + i) .textcontent = "Temp: " + data.list[i].main.temp
       }
