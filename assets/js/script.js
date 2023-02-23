@@ -98,10 +98,10 @@ function getApi() {
     .then(function (data) {
       console.log(data);
       for (var i = 0; i < 6; i++) {
-        $("#temp-" + i ) .text("Temp: " + data.list[i].main.temp + "°F")
-        $("#wind-" + i ) .text("wind: " + data.list[i].wind.speed + "MPH")
-        $("#humid-" + i ) .text("humid: " + data.list[i].main.humidity + "%")
-        $("#date-" + i ) .text("Date: " + data.list[i].dt.format("MM DD, YYYY"));
+        $("#temp-" + i).text("Temp: " + data.list[i].main.temp + "°F");
+        $("#wind-" + i).text("wind: " + data.list[i].wind.speed + "MPH");
+        $("#humid-" + i).text("humid: " + data.list[i].main.humidity + "%");
+        $("#date-" + i).text("Date: " + data.list[i].dt);
         // document.getElementById("temp-" + i) .textcontent = "Temp: " + data.list[i].main.temp
       }
     });
@@ -109,10 +109,15 @@ function getApi() {
 // GH added -city search storage & history buttons
 
 function cityRequest() {
-  if (citySearchBar.value === "") {
+  var searchResult = citySearchBar.value.trim().toLowerCase();
+  console.log(cityCount.indexOf(searchResult));
+  console.log(searchResult);
+  if (searchResult === "") {
+    return;
+  } else if (cityCount.indexOf(searchResult) >= 0) {
     return;
   } else {
-    cityCount.push(citySearchBar.value);
+    cityCount.push(searchResult);
     localStorage.setItem("cities", JSON.stringify(cityCount));
     cityCount = JSON.parse(localStorage.getItem("cities"));
     parentSearch.textContent = "";
@@ -126,8 +131,10 @@ function cityRequest() {
 
       // click event on button created with previous city search
       addedCity.addEventListener("click", function (event) {
-        cityChoice = event.target.innerText;
+        cityChoice = event.target.innerText.trim().toLowerCase();
         console.log(cityChoice);
+        console.log(cityCount);
+
         // addCurrentWeather();
         // getApi();
       });
