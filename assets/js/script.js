@@ -79,7 +79,7 @@ function addCurrentWeather() {
 }
 
 /* 
-  Fetches and siaplys the forecast for 5 days based on lat and lon
+  Fetches and displays the forecast for 5 days based on lat and lon
 */
 function fiveDayForecast() {
   var queryURL =
@@ -96,8 +96,9 @@ function fiveDayForecast() {
       return response.json();
     })
     .then(function (data) {
-      for (var i = 0; i < 5; i++) {
-        var timeStamp = i * 8 + 3;
+      console.log(data);
+      for (var i = 1; i < 6; i++) {
+        var timeStamp = i * 7 ;
         console.log(timeStamp);
         console.log(data.list[timeStamp].main.temp);
         $("#temp-" + i).text("Temp: " + data.list[timeStamp].main.temp + "°F");
@@ -111,8 +112,7 @@ function fiveDayForecast() {
           "src",
           `https://openweathermap.org/img/wn/${data.list[timeStamp].weather[0].icon}.png`
         );
-        //$("#date-" + i ) .text("Date: " + data.list[i].dt.format("MM DD, YYYY"));
-        // document.getElementById("temp-" + i) .textcontent = "Temp: " + data.list[i].main.temp
+        $("#date-" + i ) .text(dayjs(data.list[timeStamp].dt_txt).format("ddd, MMM D"));
       }
     });
 }
