@@ -99,10 +99,9 @@ function fiveDayForecast() {
     .then(function (data) {
       console.log(data);
       for (var i = 0; i < 6; i++) {
-
-        $("#temp-" + i ) .text("Temp: " + data.list[i].main.temp + "°F")
-        $("#wind-" + i ) .text("wind: " + data.list[i].wind.speed + "MPH")
-        $("#humid-" + i ) .text("humid: " + data.list[i].main.humidity + "%")
+        $("#temp-" + i).text("Temp: " + data.list[i].main.temp + "°F");
+        $("#wind-" + i).text("wind: " + data.list[i].wind.speed + "MPH");
+        $("#humid-" + i).text("humid: " + data.list[i].main.humidity + "%");
         //$("#date-" + i ) .text("Date: " + data.list[i].dt.format("MM DD, YYYY"));
         // document.getElementById("temp-" + i) .textcontent = "Temp: " + data.list[i].main.temp
       }
@@ -126,20 +125,19 @@ function cityRequest() {
     cityCount = JSON.parse(localStorage.getItem("cities"));
     parentSearch.textContent = "";
 
+    for (i = 0; i < cityCount.length; i++) {
+      var addedCity = document.createElement("button");
+      addedCity.textContent = cityCount[i];
+      addedCity.className = "previousCities";
+      parentSearch.appendChild(addedCity);
 
-  for (i = 0; i < cityCount.length; i++) {
-    var addedCity = document.createElement("button");
-    addedCity.textContent = cityCount[i];
-    addedCity.className = "previousCities";
-    parentSearch.appendChild(addedCity);
-
-
-    // click event on button created with previous city search
-    addedCity.addEventListener("click", function (event) {
-      cityChoice = event.target.innerText;
-      console.log(cityChoice);
-      search(cityChoice);
-    });
+      // click event on button created with previous city search
+      addedCity.addEventListener("click", function (event) {
+        cityChoice = event.target.innerText;
+        console.log(cityChoice);
+        search(cityChoice);
+      });
+    }
   }
 }
 
@@ -153,10 +151,8 @@ fetchButton.addEventListener("click", function () {
   }
 });
 
-
-//Display cities from local storage when page loads. Handler for .ready 
-$( function(){
-  
+//Display cities from local storage when page loads. Handler for .ready
+$(function () {
   for (i = 0; i < cityCount.length; i++) {
     var addedCity = document.createElement("button");
     addedCity.textContent = cityCount[i];
@@ -169,5 +165,5 @@ $( function(){
       console.log(cityChoice);
       search(cityChoice);
     });
-    }
-} )
+  }
+});
