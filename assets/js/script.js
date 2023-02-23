@@ -5,31 +5,31 @@ var cCity = document.getElementById("currnet-city");
 var cTemp = document.getElementById("currnet-temp");
 var cWind = document.getElementById("currnet-wind");
 var cHumidity = document.getElementById("currnet-humidity");
+var navIcon = document.getElementById("nav-icon");
+var cIcon = document.getElementById("current-icon");
 var fetchButton = document.getElementById("searchBtn");
 
 //temporary values for lat and lon  later to be updated by Travi's function
 var lat = "39.73";
 var lon = "-104.98";
 
-var citySearch =
-  "https://api.openweathermap.org/data/2.5/forecast?q=" +
-  city +
-  "&appid=" +
-  APIKey;
+//search function that will convert the lat and lon to the addCurrentWeather function
+function search() {
+  var citySearch =
+    "https://api.openweathermap.org/data/2.5/forecast?q=" +
+    city +
+    "&appid=" +
+    APIKey;
 
-fetch(citySearch)
-  .then(function (response) {
-    return response.json();
-  })
-  .then(function (data) {
-    console.log(data);
-
-    for (var i = 0; i < data.length; i++) {
-      var lat = data[i].city.coord.lat;
-      console.log(lat);
-    }
-  });
-
+  fetch(citySearch)
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (data) {
+      var lat = data.city.coord.lat;
+      var lon = data.city.coord.lon;
+    });
+}
 /* 
   Fetches the /weather data based on the lat and lon.
   Displays the data in the top card
@@ -52,13 +52,27 @@ function addCurrentWeather() {
       return response.json();
     })
     .then(function (data) {
-      console.log(data);
+      if (data) {
+        console.log(data);
+      } else {
+        console.log("data did not load");
+      }
+      console.log(data ? data : "data did not load"); //Turnery statement
 
       //displaying the data
       $("#current-city").text(data.name);
-      $("#current-temp").text("Temp: " + data.main.temp);
-      $("#current-wind").text("Wind: " + data.wind.speed);
-      $("#current-humidity").text("Humidity: " + data.main.humidity);
+      $("#current-temp").text("Temp: " + data.main.temp + "°F");
+      $("#current-wind").text("Wind: " + data.wind.speed + " MPH");
+      $("#current-humidity").text("Humidity: " + data.main.humidity + " %");
+      //
+      $("#current-icon").attr(
+        "src",
+        `https://openweathermap.org/img/wn/${data.weather[0].icon}.png`
+      );
+      $("#nav-icon").attr(
+        "src",
+        `https://openweathermap.org/img/wn/${data.weather[0].icon}.png`
+      );
     });
 }
 
