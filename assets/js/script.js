@@ -99,12 +99,12 @@ function fiveDayForecast() {
     .then(function (data) {
       console.log(data);
       for (var i = 0; i < 6; i++) {
+        var formatDate = dayjs(data.list[i].dt_txt);
 
-        $("#temp-" + i ) .text("Temp: " + data.list[i].main.temp + "°F")
-        $("#wind-" + i ) .text("wind: " + data.list[i].wind.speed + "MPH")
-        $("#humid-" + i ) .text("humid: " + data.list[i].main.humidity + "%")
-        //$("#date-" + i ) .text("Date: " + data.list[i].dt.format("MM DD, YYYY"));
-        // document.getElementById("temp-" + i) .textcontent = "Temp: " + data.list[i].main.temp
+        $("#temp-" + i ) .text("Temp: " + data.list[i].main.temp + "°F");
+        $("#wind-" + i ) .text("Wind: " + data.list[i].wind.speed + "MPH");
+        $("#humid-" + i ) .text("Humid: " + data.list[i].main.humidity + "%");
+        $("#date-" + i ) .text("Date: " + formatDate.format('ddd, MMM D'));
       }
     });
 }
@@ -142,6 +142,7 @@ function cityRequest() {
     });
   }
 }
+}
 
 //just the button listener
 fetchButton.addEventListener("click", function () {
@@ -156,7 +157,7 @@ fetchButton.addEventListener("click", function () {
 
 //Display cities from local storage when page loads. Handler for .ready 
 $( function(){
-  
+
   for (i = 0; i < cityCount.length; i++) {
     var addedCity = document.createElement("button");
     addedCity.textContent = cityCount[i];
@@ -170,4 +171,4 @@ $( function(){
       search(cityChoice);
     });
     }
-} )
+} );
