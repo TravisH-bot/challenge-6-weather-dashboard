@@ -99,6 +99,7 @@ function fiveDayForecast() {
     .then(function (data) {
       console.log(data);
       for (var i = 0; i < 6; i++) {
+
         $("#temp-" + i ) .text("Temp: " + data.list[i].main.temp + "°F")
         $("#wind-" + i ) .text("wind: " + data.list[i].wind.speed + "MPH")
         $("#humid-" + i ) .text("humid: " + data.list[i].main.humidity + "%")
@@ -112,16 +113,26 @@ function fiveDayForecast() {
   GH added -city search storage & history buttons
 */
 function cityRequest() {
-  cityCount.push(citySearchBar.value);
-  localStorage.setItem("cities", JSON.stringify(cityCount));
-  cityCount = JSON.parse(localStorage.getItem("cities"));
-  parentSearch.textContent = "";
+  var searchResult = citySearchBar.value.trim().toLowerCase();
+  console.log(cityCount.indexOf(searchResult));
+  console.log(searchResult);
+  if (searchResult === "") {
+    return;
+  } else if (cityCount.indexOf(searchResult) >= 0) {
+    return;
+  } else {
+    cityCount.push(searchResult);
+    localStorage.setItem("cities", JSON.stringify(cityCount));
+    cityCount = JSON.parse(localStorage.getItem("cities"));
+    parentSearch.textContent = "";
+
 
   for (i = 0; i < cityCount.length; i++) {
     var addedCity = document.createElement("button");
     addedCity.textContent = cityCount[i];
     addedCity.className = "previousCities";
     parentSearch.appendChild(addedCity);
+
 
     // click event on button created with previous city search
     addedCity.addEventListener("click", function (event) {
