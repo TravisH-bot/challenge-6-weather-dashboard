@@ -98,7 +98,7 @@ function fiveDayForecast() {
     .then(function (data) {
       console.log(data);
       for (var i = 1; i < 6; i++) {
-        var timeStamp = i * 7 ;
+        var timeStamp = i * 6;
         console.log(timeStamp);
         console.log(data.list[timeStamp].main.temp);
         $("#temp-" + i).text("Temp: " + data.list[timeStamp].main.temp + "°F");
@@ -112,7 +112,9 @@ function fiveDayForecast() {
           "src",
           `https://openweathermap.org/img/wn/${data.list[timeStamp].weather[0].icon}.png`
         );
-        $("#date-" + i ) .text(dayjs(data.list[timeStamp].dt_txt).format("ddd, MMM D"));
+        $("#date-" + i).text(
+          dayjs(data.list[timeStamp].dt_txt).format("ddd, MMM D")
+        );
       }
     });
 }
@@ -149,7 +151,6 @@ function cityRequest() {
     }
   }
 }
-
 
 //just the button listener
 fetchButton.addEventListener("click", function () {
